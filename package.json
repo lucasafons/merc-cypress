@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lucasafons/merc-cypress/issues"
   },
-  "homepage": "https://github.com/lucasafons/merc-cypress#readme"
+  "homepage": "https://github.com/lucasafons/merc-cypress#readme",
+  "dependencies": {
+    "git": "^0.1.5"
+  }
 }
