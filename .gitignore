@@ -1,2 +1,6 @@
 # dependecies
 node_modules/
+
+# videos and screenshots
+cypress/videos
+cypress/screenshots
