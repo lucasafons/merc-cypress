@@ -23,3 +23,29 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', () => {
+    cy.request({
+      method: 'POST',
+      url: '/app/chat_android/login',
+      body: {
+          number: "53999100004",
+          password: "123456"
+      }
+  }).then((loginResponse) => {
+      cy.visit('/', {
+          onBeforeLoad: (win) => {
+              win.localStorage.setItem('fm_laravel_session', loginResponse.body.token)
+          }
+      });
+    })
+})
+Cypress.Commands.add("isNotActionable", function(selector) {
+  cy.get(selector).click()
+  cy.once('fail', (err) => {
+    expect(err.message).to.include('cy.click() failed because this element');
+    expect(err.message).to.include('is being covered by another element');
+
+  });
+}) 
+
