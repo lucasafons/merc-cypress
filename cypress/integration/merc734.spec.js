@@ -3,8 +3,8 @@
 import merc from '../support/pages/merc734'
 
 describe('MERCURIO-734', () => {
-    context('Acessando seção serviços na Edição de perfil', () => {
-        it('Limitar 3 favoritos', () => {
+    context('É possivel favoritar no máximo 6 vezes porém apenas 3 serviços distintos', () => {
+        it('3 serviços e 3 favoritos', () => {
             // Arrange
             merc.accessHomeAD()
             merc.enterProfileEdit()
@@ -13,11 +13,22 @@ describe('MERCURIO-734', () => {
             merc.stepsLocationData()
             merc.stepsPersonalData()
             merc.stepsProfessionalData()
-            merc.stepsValuesData()
-
-            // Assert
-            merc.confirmProfileEdit
+            merc.stepsValuesData3fav()
         });
+        it('3 servicos e 6 favoritos', () => {
+             // Arrange
+             merc.accessHomeAD()
+             merc.enterProfileEdit()
+ 
+             // Act
+             merc.stepsLocationData()
+             merc.stepsPersonalData()
+             merc.stepsProfessionalData()
+             merc.stepsValuesData6fav()
+ 
+             // Assert
+             merc.confirmProfileEdit()
+        })
     })
 
 })

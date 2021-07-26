@@ -34,7 +34,7 @@ class merc734 {
         cy.get(el.continueButton).click();
     }
 
-    stepsValuesData() {
+    stepsValuesData3fav() {
         cy.get(el.companionDoesLabel).click();
         cy.get(el.favCompanionDoesService).click()
         cy.get(el.companionDoesDescription)
@@ -63,13 +63,70 @@ class merc734 {
             })
         
         cy.get(el.dominationDoesLabel).click();
-        cy.get(el.favDominationDoesService).click()
+        cy.get(el.favDominationDoesService).click( {force: true} )
+        cy.get(el.dominationDoesDescription)
+            .should('not.have.html', 'p:last-child')
+    }
+    stepsValuesData6fav() {
+        cy.get(el.greekKissDoesLabel).click();
+        cy.get(el.favGreekKissDoesService).click()
+        cy.get(el.greekKissDoesDescription)
+           .find('p:last-child')
+           .should(($p)=> {
+                expect($p).to.be.visible
+                expect($p).to.contain('Você pode favoritar até 3 serviços.')
+           })
+        cy.get(el.greekKissReceiveLabel).click();
+        cy.get(el.favGreekKissReceiveService).click()
+        cy.get(el.greekKissReceiveDescription)
+           .find('p:last-child')
+           .should(($p)=> {
+                expect($p).to.be.visible
+                expect($p).to.contain('Você pode favoritar até 3 serviços.')
+           })
+
+        cy.get(el.bondageDoesLabel).click()
+        cy.get(el.favBondageDoesService).click()
+        cy.get(el.bondageDoesDescription)
+            .find('p:last-child')
+            .should(($p)=> {
+                expect($p).to.be.visible
+                expect($p).to.contain('Você pode favoritar até 3 serviços.')
+            })
+        
+        cy.get(el.bondageReceiveLabel).click()
+        cy.get(el.favBondageReceiveService).click()
+        cy.get(el.bondageReceiveDescription)
+            .find('p:last-child')
+            .should(($p)=> {
+                expect($p).to.be.visible
+                expect($p).to.contain('Você pode favoritar até 3 serviços.')
+            })
+        cy.get(el.goldenShowerDoesLabel).click();
+        cy.get(el.favGoldenShowerDoesService).click()
+        cy.get(el.goldenShowerDoesDescription)
+           .find('p:last-child')
+           .should(($p)=> {
+                expect($p).to.be.visible
+                expect($p).to.contain('Você pode favoritar até 3 serviços.')
+           })
+        cy.get(el.goldenShowerReceiveLabel).click();
+        cy.get(el.favGoldenShowerReceiveService).click()
+        cy.get(el.goldenShowerReceiveDescription)
+           .find('p:last-child')
+           .should(($p)=> {
+                expect($p).to.be.visible
+                expect($p).to.contain('Você pode favoritar até 3 serviços.')
+           })
+        
+        cy.get(el.dominationDoesLabel).click();
+        cy.get(el.favDominationDoesService).click( {force: true} )
         cy.get(el.dominationDoesDescription)
             .should('not.have.html', 'p:last-child')
     }
 
     confirmProfileEdit() {
-        cy.get(el.continueButton).click()
+        cy.get(el.finishButton).click()
         cy.get(el.sucessModalLabel)
             .should('contain', 'Sucesso ao editar perfil!');
     }
