@@ -10,14 +10,13 @@ describe('Testando invalidez de código após reenvio', () => {
         merc.accessRegisterAD()
         merc.inputPhoneAD();
         // Act
-        //merc.forward1minute()
+        merc.forward1minute()
         merc.getCodeAndType();
-        //merc.resendCode();
-        //merc.submitCode();
-        
+        merc.resendCode();
+        merc.submitInvalidCode();
         // Assert
-        
-        //merc.getCodeAndType();
-        //merc.submitCode();
+        merc.deleteCode();
+        merc.getCodeAndType();
+        merc.submitValidCode();
     });
 });

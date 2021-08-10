@@ -16,6 +16,8 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+import Routes from './routes'
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     return false
 })
@@ -23,3 +25,6 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
+before(() => {
+  Routes.init()
+})

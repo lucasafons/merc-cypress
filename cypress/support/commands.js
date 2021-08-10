@@ -25,52 +25,18 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', () => {
-    cy.request({
-      method: 'POST',
-      url: '/app/chat_android/login',
-      body: {
-          number: "53999100004",
-          password: "123456"
-      }
+  cy.request({
+    method: 'POST',
+    url: '/app/chat_android/login',
+    body: {
+      number: "53999100004",
+      password: "123456"
+    }
   }).then((loginResponse) => {
-      cy.visit('/', {
-          onBeforeLoad: (win) => {
-              win.localStorage.setItem('fm_laravel_session', loginResponse.body.token)
-          }
-      });
-    })
+    cy.visit('/', {
+      onBeforeLoad: (win) => {
+        win.localStorage.setItem('fm_laravel_session', loginResponse.body.token)
+      }
+    });
+  })
 })
-
-Cypress.Commands.add("getCode", async (phone) => {
-  var codes = null
-  
-  await cy.task('queryDB', `select code from phone_validate where phone = ${phone} order by created_at desc limit 1;`)
-      .then(function(recordSet) {  
-        var data = recordSet
-        //cy.wrap(recordSet).as('data');
-          codes = data[0].code
-          codes.replace(/\D+/g, '');
-          
-          cy.log(codes)
-          return codes
-          //cy.wrap(codes).as('codigo') 
-          //codes = JSON.stringify(codes)
-          //cy.log('-' + codes)
-      }) 
-      // cy.get('@data').then((data) => {
-      //   codes = data[0].code
-      //   cy.log(codes)
-      //   return data
-      // });
-      
-      
-      // cy.wait(3000) 
-      // cy.log(codes)
-      // return codes
-      // cy.log(a); 
-      // return "1234"
-      // cy.get('@codigo').then((codigo) => {
-      //   return codigo
-      // });
-})
-

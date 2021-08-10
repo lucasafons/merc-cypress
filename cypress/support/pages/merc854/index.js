@@ -1,63 +1,64 @@
 const el = require('./elements').ELEMENTS
-const phone = '53999100219';
+const phone = '53999100234';
+
+import Routes from '../../routes'
 
 class merc854 {
-  
-    accessRegisterAD() {
-        cy.visit('/profile/new');
-    }
 
-    inputPhoneAD() {
-        cy.get(el.inputPhone).type(phone);
-        cy.get(el.proceedButton).click();
-    }
+  accessRegisterAD() {
+    cy.visit('/profile/new');
+    cy.get('#agree-18').click()
+  }
 
-    getCode() {
-    let code = null
-    
-    cy.task('queryDatabase', `select code from phone_validate where phone = ${phone} order by created_at desc limit 1;`)
-        .then((recordSet) => {
-            
-            let data = recordSet
-            //cy.log(data[0].code)
-            code = data[0].code
-            code.replace(/\D+/g, '');
-            //codes = JSON.stringify(codes)
-            //cy.log(codes)
-            //cy.wrap(codigo)
-            return code
-            })     
-            cy.wait(3000) 
-            cy.log(code)
-            //return code;
-    }
+  inputPhoneAD() {
+    cy.get(el.inputPhone).type(phone);
+    cy.get(el.proceedButton).click();
+  }
 
-    forward1minute() {
-        //cy.clock();
-        cy.wait(62000)
-       // cy.tick(20000)
-        
-    }
+  forward1minute() {
+    cy.wait(62000)
+  }
 
-    getCodeAndType() {
-        //cy.log(cy.getCode(phone));
-        let code = this.getCode()
-        //cy.log(code)
-        cy.get(el.inputCode).type(code , { delay: 100 });
-        
-        //`${this.getCodeVerify()}`
-    }
+  getCodeAndType() {
+    let code;
+    cy.task('queryDatabase', `select code
+                              from phone_validate
+                              where phone = ${phone}
+                              order by created_at desc limit 1;`)
+      .then((recordSet) => {
+        code = recordSet[0].code;
+        code.replace(/\D+/g, '');
+        cy.get(el.inputCode).type(code, { delay: 100 });
+        code = 0;
+      });
+  }
 
-    resendCode() {
-        cy.get(el.resendCodeButton).click()
-           // .should('be', 'visible')
-    }
+  resendCode() {
+    cy.get(el.resendCodeButton)
+      .should('be.visible')
+      .click()
+    cy.wait(`@${Routes.as.postResendCode}`).then(({response}) => {
+      expect(response.statusCode).to.eq(200)
+    })
+  }
 
-    
+  submitInvalidCode() {
+    cy.get(el.sendMessageButton).click();
+    cy.wait(`@${Routes.as.postIsValidCode}`).then(({response}) => {
+      expect(response.statusCode).to.eq(403)
+    })
+  }
 
-    submitCode() {
-        cy.get(el.sendMessageButton).click();
-    }
+  submitValidCode() {
+    cy.get(el.sendMessageButton).click();
+    cy.wait(`@${Routes.as.postIsValidCode}`).then(({response}) => {
+      expect(response.statusCode).to.eq(200)
+    })
+  }
+
+  deleteCode() {
+    cy.get(el.deleteInputCode).type("{backspace}{backspace}{backspace}{backspace}{backspace}");
+  }
 }
 
 export default new merc854();
