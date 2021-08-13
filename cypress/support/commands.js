@@ -29,7 +29,7 @@ Cypress.Commands.add('login', () => {
     method: 'POST',
     url: '/app/chat_android/login',
     body: {
-      number: "53999100004",
+      number: "53999100007",
       password: "123456"
     }
   }).then((loginResponse) => {
