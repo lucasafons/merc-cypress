@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/lucasafons/merc-cypress#readme",
   "dependencies": {
+    "faker": "^5.5.3",
     "git": "^0.1.5",
     "mysql": "github:mysqljs/mysql"
   },

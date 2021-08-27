@@ -37,21 +37,21 @@ class merc854 {
     cy.get(el.resendCodeButton)
       .should('be.visible')
       .click()
-    cy.wait(`@${Routes.as.postResendCode}`).then(({response}) => {
+    cy.wait(`@${Routes.as.postResendCode}`).then(({ response }) => {
       expect(response.statusCode).to.eq(200)
     })
   }
 
   submitInvalidCode() {
     cy.get(el.sendMessageButton).click();
-    cy.wait(`@${Routes.as.postIsValidCode}`).then(({response}) => {
+    cy.wait(`@${Routes.as.postIsValidCode}`).then(({ response }) => {
       expect(response.statusCode).to.eq(403)
     })
   }
 
   submitValidCode() {
     cy.get(el.sendMessageButton).click();
-    cy.wait(`@${Routes.as.postIsValidCode}`).then(({response}) => {
+    cy.wait(`@${Routes.as.postIsValidCode}`).then(({ response }) => {
       expect(response.statusCode).to.eq(200)
     })
   }
