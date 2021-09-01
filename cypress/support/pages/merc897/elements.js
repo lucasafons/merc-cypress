@@ -7,6 +7,7 @@ export const ELEMENTS = {
   searchDistrictCombo: 'div[name=search-neighborhood]',
   continueButton: '.colorful-primary',
   clientsButton: "div[class='text-select__option colorful']:nth-child(1)",
+  attendLocationButton: ".attend-locations > :nth-child(1) > label",
   companionDoesLabel: "label[for*='acompanhantedoes']:nth-child(1)",
   favCompanionDoesService: "#edit-ad-profile > div > div.price-data > div.services-list > div:nth-child(1) > div > div.service__description > div.service__two-column > div.fm-button:nth-child(2)",
   companionDoesDescription: "#edit-ad-profile > div > div.price-data > div.services-list > div:nth-child(1) > div > div.service__description",

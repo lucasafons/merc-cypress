@@ -2,7 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/cypress-io/cypress/develop/cli/schema/cypress.schema.json",
     "viewportWidth": 675,
     "viewportHeight": 812,
-    "baseUrl": "https://fm-site-br",
+    "video": false,
     "watchForFileChanges": false,
     "testFiles": "**/*.*spec*",
     "env": {

@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:run:local": "npx cypress run --config baseUrl=https://fm-site-br",
+    "cy:run:prod": "npx cypress run --config baseUrl=https://fatalmodel.com",
+    "cy:open:local": "npx cypress open --config baseUrl=https://fm-site-br",
+    "cy:open:prod": "npx cypress open --config baseUrl=https://fatalmodel.com"
   },
   "repository": {
     "type": "git",

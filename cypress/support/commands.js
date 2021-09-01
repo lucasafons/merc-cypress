@@ -40,3 +40,20 @@ Cypress.Commands.add('login', () => {
     });
   })
 })
+
+Cypress.Commands.add('login2', () => {
+  cy.request({
+    method: 'POST',
+    url: '/app/chat_android/login',
+    body: {
+      number: "53999100009",
+      password: "123456"
+    }
+  }).then((loginResponse) => {
+    cy.visit('/', {
+      onBeforeLoad: (win) => {
+        win.localStorage.setItem('fm_laravel_session', loginResponse.body.token)
+      }
+    });
+  })
+})

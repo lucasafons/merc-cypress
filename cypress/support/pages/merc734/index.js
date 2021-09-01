@@ -31,6 +31,10 @@ class merc734 {
     cy.get(el.clientsButton).click()
       .should('have.class', 'active')
       .should('contain', '1 cliente')
+    cy.get(el.attendLocationButton).click()
+
+    
+      .should('contain', 'Local próprio para atendimento')
     cy.get(el.continueButton).click();
   }
 

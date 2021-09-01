@@ -2,7 +2,7 @@ const el = require('./elements').ELEMENTS;
 
 class merc897 {
   accessHomeAD() {
-    cy.login();
+    cy.login2();
   }
 
   enterProfileEdit() {
@@ -16,9 +16,9 @@ class merc897 {
   }
 
   stepsLocationData() {
-    cy.get(el.districtCombo).type('Centro{enter}', { delay: 150 });
+    cy.get(el.districtCombo).type('Centro{enter}', { delay: 250 });
     cy.get(el.referenceInput).type('teste');
-    cy.get(el.searchDistrictCombo).type('Centro{enter}', { delay: 150 });
+    cy.get(el.searchDistrictCombo).type('Centro{enter}', { delay: 250 });
 
     cy.get(el.continueButton).click();
   }
@@ -31,6 +31,8 @@ class merc897 {
     cy.get(el.clientsButton).click()
       .should('have.class', 'active')
       .should('contain', '1 cliente')
+    cy.get(el.attendLocationButton).click()
+      .should('contain', 'Local próprio para atendimento')
     cy.get(el.continueButton).click();
   }
 
